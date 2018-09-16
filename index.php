@@ -16,6 +16,10 @@
 
 <?php 
 
+	$deleteSuccess = false;	
+	$addSuccess = false;
+	$errorData = "";
+
 	// Connect to DB
 	$link = mysqli_connect('localhost','root','root','WD04-filmoteka-gurov');
 	$error = mysqli_connect_error();
@@ -24,20 +28,42 @@
 		exit("Connection failed: $error .");
 	}
 
-	// Add new data to DB
-	if (array_key_exists('add-newFilm', $_POST)) {
-		
-		$query = "INSERT INTO `films` (`name`,`genre`,`year`) VALUES ('" 
-					. $_POST['title'] . "','"
-					. $_POST['genre'] . "','"
-					. $_POST['year'] . "')";
+	// Delete data from DB
+	// echo "<pre>";
+	// print_r($_POST);
+	// echo "</pre>";
 
-		if (mysqli_query($link,$query)) {
-			// echo "<p>Новый фильм был успешно добавлен.</p>";
-		} else {
-			echo "<p>Новый фильм не был добавлен. Произошла ошибка:" . mysqli_error($link) . "</p>";
+	if ( $_GET ) {
+		if ( $_GET['action']=='delete' ) {
+			$query = "DELETE FROM `films` WHERE id='" . mysqli_real_escape_string($link, $_GET['id']) . "'";
+			mysqli_query($link,$query);
+
+			if (mysqli_affected_rows($link) > 0) {
+				$deleteSuccess = true;
+
+			}
 		}
-		
+	}
+
+
+	// Add new data to DB
+	// if (array_key_exists('add-newFilm', $_POST)) {
+	if ( $_GET ) {
+		if ( $_GET['action']=='add' ) {
+			
+			$query = "INSERT INTO `films` (`name`,`genre`,`year`) VALUES ('" 
+						. mysqli_real_escape_string($link, $_POST['title']) . "','"
+						. mysqli_real_escape_string($link, $_POST['genre']) . "','"
+						. mysqli_real_escape_string($link, $_POST['year']) . "')";
+
+			if (mysqli_query($link,$query)) {
+				$addSuccess = true;
+			} else {
+				// echo "<p>Новый фильм не был добавлен. Произошла ошибка:" . mysqli_error($link) . "</p>";
+				$errorData = "Произошла ошибка:" . mysqli_error($link);
+			}
+			
+		}
 	}
 
 
@@ -50,12 +76,31 @@
 
 <body class="index-page">
 	<div class="container user-content section-page">
+		
+		<?php if ($deleteSuccess) { ?>
+			<div class="notify notify--update mb-20">Фильм удален</div>
+		<?php } ?>
+
+		<?php if ($addSuccess) { ?>
+			<div class="notify notify--success mb-20">Фильм добавлен</div>
+		<?php } ?>
+
+		<?php if ($errorData != "") { ?>
+			<div class="notify notify--error mb-20"><?php echo $errorData; ?></div>
+		<?php } ?>
+		
 		<div class="title-1">Фильмотека</div>
 		
 		<?php while ($row = mysqli_fetch_array($result)) {?>
 
 		<div class="card mb-20">
-			<h4 class="title-4"> <?php echo $row['name'];?> </h4>
+			<div class="card__header">
+				<h4 class="title-4"> <?php echo $row['name'];?> </h4>
+				<div class="buttons">
+					<a href="edit.php?id=<?php echo $row['id'];?>" class="button button--edit">Изменить</a>
+					<a href="?action=delete&id=<?php echo $row['id'];?>" class="button button--remove">Удалить</a>
+				</div>
+			</div>
 			<div class="badge"> <?php echo $row['genre'];?> </div>
 			<div class="badge"> <?php echo $row['year'];?> </div>
 		</div>
@@ -65,10 +110,10 @@
 
 		<div class="panel-holder mt-80 mb-40">
 			<div class="title-3 mt-0">Добавить фильм</div>
-			<form id="form-film-add" action="index.php" method="POST">
+			<form id="form-film-add" action="index.php?action=add" method="POST">
 
-				<div class="notify notify--error mb-20 d-none">Необходимо заполнить все поля!</div>
-				<div class="notify notify--success mb-20 d-none">Вы добавили новый фильм!</div>
+				<div class="notify notify--error display-none mb-20">Необходимо заполнить все поля!</div>
+				<!-- <div class="notify notify--success mb-20">Вы добавили новый фильм!</div> -->
 				
 				<div class="form-group">
 					<label class="label">Название фильма
