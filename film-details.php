@@ -9,7 +9,7 @@
 
 	// Delete Film from DB
 	if ( $_GET ) {
-		if ( $_GET['action']=='delete' ) {
+		if ( @$_GET['action']=='delete' ) {
 			$result = deleteFilm($link, $_GET['id']);
 
 			if ($result) $deleteSuccess = true;
@@ -17,16 +17,12 @@
 		}
 	}
 
-	// Upload all films data
-	$result = uploadAllFilms($link);
+	// Upload film data
+	$film = getFilm($link, $_GET['id']);
 
 	include('views/header.tpl');
 	include('views/notifications.tpl');
-	include('views/index.tpl');
+	include('views/film-details.tpl');
 	include('views/footer.tpl');
 
 ?>
-
-
-
-	

@@ -249,8 +249,8 @@ a.badge:active {
   border-color: #dde8ee;
   border-style: solid;
   border-radius: 22px;
-  padding-bottom: 0.9em;
-  padding-top: 0.7em;
+  padding-bottom: 0.5em;
+  padding-top: 0.5em;
   padding-left: 1.25em;
   padding-right: 1.25em;
   color: #037EC6;
@@ -614,7 +614,7 @@ a.badge:active {
   border: 1px solid #B1BFC7;
   padding: 10px 15px 30px 15px;
   display: block;
-  min-height: 110px;
+  min-height: 50px;
   outline: none;
   -webkit-transition: border 0.4s ease-in-out, -webkit-box-shadow 0.4s ease-in-out;
   transition: border 0.4s ease-in-out, -webkit-box-shadow 0.4s ease-in-out;
@@ -915,7 +915,7 @@ a.title,
 }
 .user-content p {
   color: #383737;
-  line-height: 2em;
+  line-height: 1.5;
   margin-bottom: 0.9em;
 }
 .user-content p a {

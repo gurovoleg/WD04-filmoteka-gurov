@@ -2,7 +2,7 @@ $(document).ready(function() {
 	
 	setTimeout(function(){
 		$('.notify').fadeOut();
-	},2500)
+	},1500)
 
 	$('#form-film-add').on('submit',function(e){
 		currentForm = this;
@@ -12,11 +12,10 @@ $(document).ready(function() {
 			|| $(this).find(".input[name='genre']").val() == "" 
 			|| $(this).find(".input[name='year']").val() == "" ) {
 
-			$('.notify--error').fadeIn(400,function(){
-				$(this).fadeOut(1000);
-			});
-
 			e.preventDefault();
+			$('.notify--error').fadeIn(400,function(){
+				$(this).fadeOut(2000);
+			});
 
 		} else {
 
