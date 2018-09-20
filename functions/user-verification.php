@@ -11,5 +11,17 @@
 		return $result;
 	}
 
+	function isAdmin() {
+		$result = false;
+		
+		if ( isset($_SESSION['admin']) ) {
+			$result = true;
+		}
+
+		return $result;
+	}
+
+
+
 
  ?>

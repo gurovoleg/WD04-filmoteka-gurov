@@ -12,7 +12,7 @@
 				<div class="card__header">
 					<h4 class="title-4"> <?=$row['name'];?> </h4>
 					<div class="buttons">
-						<?php if ( isUserExist() ) { ?>
+						<?php if ( isAdmin() ) { ?>
 							<a href="edit-film.php?id=<?=$row['id'];?>" class="button button--edit">Изменить</a>
 							<a href="?action=delete&id=<?=$row['id'];?>" class="button button--remove">Удалить</a>
 						<?php } ?>
