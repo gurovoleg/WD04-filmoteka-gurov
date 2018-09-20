@@ -16,6 +16,19 @@
 	<div class="container user-content">
 		<div class="mt-20 mb-30">
 			<a href="index.php" class="mr-10">Все фильмы</a>
-			<a href="add-film.php">Добавить фильм</a>
+			<a href="add-film.php" class="mr-10">Добавить фильм</a>
+			<a href="request.php">Профиль пользователя</a>
+		</div>
+
+		<div class="mb-50">
+			<?php if ( isset($_COOKIE['user-name']) ) {?>
+
+				<?php if ( isset($_COOKIE['user-city']) ) {?>
+					Привет, <?=$_COOKIE['user-name'];?>, из города <?=$_COOKIE['user-city'];?>!
+				<?php } else {?>
+					Привет, <?=$_COOKIE['user-name'];?>!
+				<?php } ?>
+
+			<?php } ?>
 		</div>
 	
