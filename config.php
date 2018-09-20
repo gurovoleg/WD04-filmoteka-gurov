@@ -1,5 +1,15 @@
 <?php 
 
+	session_start();
+
+	// echo "<pre>";
+	// print_r($_GET);
+	// echo "</pre>";
+
+	// echo "<pre>";
+	// print_r($_SESSION);
+	// echo "</pre>";
+
 	// DB const
 	define('MYSQL_SERVER', 'localhost');
 	define('MYSQL_USER', 'root');

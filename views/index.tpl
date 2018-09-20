@@ -12,8 +12,10 @@
 				<div class="card__header">
 					<h4 class="title-4"> <?=$row['name'];?> </h4>
 					<div class="buttons">
-						<a href="edit-film.php?id=<?=$row['id'];?>" class="button button--edit">Изменить</a>
-						<a href="?action=delete&id=<?=$row['id'];?>" class="button button--remove">Удалить</a>
+						<?php if ( isUserExist() ) { ?>
+							<a href="edit-film.php?id=<?=$row['id'];?>" class="button button--edit">Изменить</a>
+							<a href="?action=delete&id=<?=$row['id'];?>" class="button button--remove">Удалить</a>
+						<?php } ?>
 					</div>
 				</div>
 				<div class="badge"> <?php echo $row['genre'];?> </div>

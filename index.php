@@ -6,6 +6,7 @@
 	$link = dbConnect();
 
 	require('models/films.php');
+	require('functions/user-verification.php');
 
 	// Delete Film from DB
 	if ( $_GET ) {

@@ -16,8 +16,13 @@
 	<div class="container user-content">
 		<div class="mt-20 mb-30">
 			<a href="index.php" class="mr-10">Все фильмы</a>
-			<a href="add-film.php" class="mr-10">Добавить фильм</a>
-			<a href="request.php">Профиль пользователя</a>
+			<?php if ( isUserExist() ) { ?>
+				<a href="add-film.php" class="mr-10">Добавить фильм</a>
+				<a href="request.php" class="mr-10">Профиль пользователя</a>
+				<a href="login.php?action=resetSession">Выйти</a>
+			<?php } else {?>
+				<a href="login.php" class="mr-10">Войти</a>
+			<?php } ?>
 		</div>
 
 		<div class="mb-50">

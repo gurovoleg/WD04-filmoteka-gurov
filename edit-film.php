@@ -6,6 +6,7 @@
 	$link = dbConnect();
 
 	require('models/films.php');
+	require('functions/user-verification.php');
 
 	// Update film in DB
 	if (array_key_exists('update-Film', $_POST)) {
