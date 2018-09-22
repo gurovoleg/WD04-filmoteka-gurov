@@ -5,7 +5,7 @@
 	<div class="card mb-20">
 		<div class="row">
 			<div class="col-auto">
-				<img height="200" src="<?=IMG_PATH.$row['photo'];?>" alt="<?=$row['name'];?>">
+				<img src="<?=IMG_PATH_MIN.$row['photo'];?>" alt="<?=$row['name'];?>">
 			</div>
 
 			<div class="col">

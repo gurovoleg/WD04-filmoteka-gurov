@@ -14,6 +14,7 @@
 	function addNewFilm($link, $title, $genre, $year, $description){
 
 		$result = processImageFile();
+		
 		if ($result != false) $dbFileName = $result;
 		else $dbFileName = "";
 
@@ -106,19 +107,20 @@
 			// echo "uploadFile:" . $uploadFile . "<br>";
 			
 			$result = move_uploaded_file($fileTmpLocation, $uploadFile);
+			
+			// Обрезаем файл - делаем миниатюру. Нужна бибилиотека imagick
+			require_once( ROOT . "functions/image_resize_imagick.php");
+			$target_file =  $photoFolderLocation . $dbFileName;
+			$resized_file = $photoFolderLocationMin . $dbFileName;
+			$wmax = 137;
+			$hmax = 200;
+			$img = createThumbnail($target_file, $wmax, $hmax);
+			$img->writeImage($resized_file);
+
 			if (!$result) {
 				$errorData = "File upload failed";
 				return false;
 			} else return $dbFileName;
-
-			// Обрезаем файл - делаем миниатюру. Нужна бибилиотека imagick
-			// require_once( ROOT . "functions/image_resize_imagick.php");
-			// $target_file =  $photoFolderLocation . $dbFileName;
-			// $resized_file = $photoFolderLocationMin . $dbFileName;
-			// $wmax = 137;
-			// $hmax = 200;
-			// $img = createThumbnail($target_file, $wmax, $hmax);
-			// $img->writeImage($resized_file);
 		
 		} else return false;
 	}
